@@ -1,18 +1,15 @@
 <template>
-  <div id="app">Hello Sketch Center</div>
+  <div id="main">Hello Sketch Center</div>
 </template>
 
 <script>
-
-export default {
-  name       : 'app',
-  components : {
-  },
-};
+  export default {
+    name: "Main"
+  }
 </script>
 
-<style>
-#app {
+<style scoped>
+#main {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
