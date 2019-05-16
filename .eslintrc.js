@@ -17,7 +17,7 @@ module.exports = {
 	rules:
 	{
 		'no-console': process.env.NODE_ENV === 'production' ? 2 : 0,
-    'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
+		'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
 		'array-bracket-spacing': [ 2, 'always',
 		{
 			objectsInArrays: true,

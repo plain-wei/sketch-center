@@ -1413,6 +1413,11 @@ async-each@^1.0.1:
   resolved "https://registry.npm.taobao.org/async-each/download/async-each-1.0.3.tgz#b727dbf87d7651602f06f4d4ac387f47d91b0cbf"
   integrity sha1-tyfb+H12UWAvBvTUrDh/R9kbDL8=
 
+async-exit-hook@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/async-exit-hook/download/async-exit-hook-2.0.1.tgz#8bd8b024b0ec9b1c01cccb9af9db29bd717dfaf3"
+  integrity sha1-i9iwJLDsmxwBzMua+dspvXF9+vM=
+
 async-limiter@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/async-limiter/download/async-limiter-1.0.0.tgz#78faed8c3d074ab81f22b4e985d79e8738f720f8"
@@ -2334,6 +2339,13 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+crocket@^0.9.11:
+  version "0.9.11"
+  resolved "https://registry.npm.taobao.org/crocket/download/crocket-0.9.11.tgz#288fca11ef0d3dd239b62c488265f30c8edfb0c5"
+  integrity sha1-KI/KEe8NPdI5tixIgmXzDI7fsMU=
+  dependencies:
+    xpipe "*"
 
 cross-spawn@^5.0.1, cross-spawn@^5.1.0:
   version "5.1.0"
@@ -8516,6 +8528,11 @@ ws@^6.0.0:
   integrity sha1-RC/fCkftZPWbal2P8TD0dI7VJPs=
   dependencies:
     async-limiter "~1.0.0"
+
+xpipe@*:
+  version "1.0.5"
+  resolved "https://registry.npm.taobao.org/xpipe/download/xpipe-1.0.5.tgz#8dd8bf45fc3f7f55f0e054b878f43a62614dafdf"
+  integrity sha1-jdi/Rfw/f1Xw4FS4ePQ6YmFNr98=
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.1"

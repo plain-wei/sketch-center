@@ -7,118 +7,11 @@ const SETUP_DIR = 'out/setup';
 // folder contains dist file for electron(main & renderer)
 const OUTPUT_DIR = 'out/dist';
 // entry file for electron
-const ENTRY_FILE = 'browser.js';
+const ENTRY_FILE = 'index.js';
 // install file
 const INSTALLER_DIR = 'out/installer';
 
 module.exports = (api, options) => {
-  api.registerCommand(
-    'build:installer',
-    {
-      description : 'build app with electron-wininstaller',
-      usage       : 'vue-cli-service packager [electron-wininstaller options]',
-      details     : 'TBD',
-    },
-    (args, rawArgs) => {
-      const electronInstaller = require('electron-winstaller');
-      const { done } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
-
-      electronInstaller.createWindowsInstaller({
-        appDirectory    : 'out/setup/vcd-win32-x64',
-        outputDirectory : 'out/installer',
-        authors         : 'Team 7',
-      }).then(() => {
-        done('build installer complete.');
-      });
-    }
-  );
-  
-  api.registerCommand(
-    'pack:electron',
-    {
-      description : 'build app with electron-packager',
-      usage       : 'vue-cli-service packager [electron-packager options]',
-      details     : 'TBD',
-    },
-    (args, rawArgs) => packageInstaller(args, rawArgs, api, options)
-  );
-  
-  api.registerCommand(
-    'build:electron',
-    {
-      description : 'build app with electron-builder',
-      usage       : 'vue-cli-service build:electron [electron-builder options]',
-      details     : 'TBD',
-    },
-    async(args, rawArgs) => {
-      const fs = require('fs');
-      const { remove } = require(api.resolve('./node_modules/fs-extra'));
-      const { inspect, promisify } = require('util');
-      const { execa, chalk, log, info, warn, error, done } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
-      const formatStats = require(api.resolve('./node_modules/@vue/cli-service/lib/commands/build/formatStats'));
-      const webpack = require(api.resolve('./node_modules/webpack'));
-      const builder = require('electron-builder');
-      
-      const mode = module.exports.defaultModes['build:electron'];
-      const opts = {
-        setupDir  : SETUP_DIR,
-        outputDir : OUTPUT_DIR,
-        entryFile : ENTRY_FILE,
-      };
-      
-      args.clean = true;
-      args.dest = api.resolve(opts.outputDir);
-      
-      // temporary change baseUrl
-      const { publicPath: originPublicPath } = options;
-      
-      options.publicPath = '';
-      
-      // webpack config for renderer process
-      chainRendererWebpack(api, mode);
-      
-      // webpack config for main process
-      const config = genMainWebpack(api, mode, opts);
-      
-      // config for builder
-      const builderConfig = genBuilderConfig(api, opts);
-      
-      if (args.clean) {
-        await remove(api.resolve(opts.setupDir));
-      }
-      
-      return api.service.run('build', args)
-        .then(() => promisify(webpack)(config.toConfig())
-          .then((stats) => {
-            log(formatStats(stats, api.resolve(opts.outputDir), api));
-            done(`Build complete. The ${chalk.cyan(opts.outputDir)} directory is ready to be packed.`);
-            log();
-            // restore publicPath
-            options.publicPath = originPublicPath;
-          }))
-        .then(() => {
-          if (args.nopack) return Promise.resolve();
-
-          const { writeJson } = require(api.resolve('./node_modules/fs-extra'));
-          const pacakgeInfo = require(api.resolve('package.json'));
-
-          delProperty(pacakgeInfo, [ 'scripts', 'vuePlugins', 'dependencies', 'devDependencies' ]);
-          
-          return writeJson(
-            api.resolve(`${OUTPUT_DIR}/package.json`),
-            pacakgeInfo,
-            { spaces: 2 },
-          )
-            .then(() => builder
-              .build({
-                config : builderConfig,
-              })
-              .then(() => {
-                done('Packing completed.');
-              }));
-        });
-    }
-  );
   api.registerCommand(
     'serve:electron',
     {
@@ -168,6 +61,7 @@ module.exports = (api, options) => {
           
           return new Promise((resolve, reject) => {
             let handleResolve = resolve;
+
             let handleReject = reject;
 
             const compiler = webpack(config.toConfig());
@@ -226,7 +120,9 @@ module.exports = (api, options) => {
         .then((hmrServer) => {
           const electrons = [];
           const queuedData = [];
+
           let count = 0;
+
           let lastLogIndex = null;
 
           function startElectron(index = 0) {
@@ -304,8 +200,6 @@ module.exports = (api, options) => {
 };
 
 module.exports.defaultModes = {
-  'pack:electron'  : 'production',
-  'build:electron' : 'production',
   'serve:electron' : 'development',
 };
 
@@ -376,16 +270,16 @@ function genMainWebpack(api, mode = 'production', opts = {}) {
       child_process : false,
     });
   config.target('electron-main');
-  config.entry(entryFile.substring(0, entryFile.length - 3)).add(api.resolve(`./src/${entryFile}`));
+  config.entry(entryFile.substring(0, entryFile.length - 3)).add(api.resolve(`./src/main/${entryFile}`));
   config.plugins.values().forEach((plugin) => {
     switch (plugin.name) {
       case 'define':
       case 'case-sensitive-paths':
-      case 'friendly-errors':
+      case 'friendly-errors': break;
       // development
       case 'hmr':
       case 'no-emit-on-errors':
-      case 'progress':
+      case 'progress': break;
       // production
       case 'hash-module-ids':
       case 'named-chunks':
@@ -421,209 +315,6 @@ function genMainWebpack(api, mode = 'production', opts = {}) {
     .publicPath('');
   
   return config;
-}
-
-function genBuilderConfig(api, opts) {
-  const fs = require('fs');
-  const { execa, chalk, log, info, warn, error, done } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
-  
-  const builderConfig = {
-    directories : {
-      output : api.resolve(opts.setupDir),
-      app    : api.resolve(opts.outputDir),
-    },
-    files : [
-      {
-        from   : api.getCwd(),
-        filter : [ 'package.json' ],
-      },
-      {
-        from : api.resolve(opts.outputDir),
-      },
-    ],
-    extraResources : [
-      {
-        from : api.resolve('./static'),
-        to   : 'static',
-      },
-    ],
-    extraMetadata : { main: opts.entryFile },
-    extends       : null,
-  };
-  
-  // const configPath = api.resolve('./electron-builder.json');
-  // let userBuilderConfig;
-  
-  // if (fs.existsSync(configPath)) {
-  //   try {
-  //     userBuilderConfig = require(configPath);
-  //     if (!userBuilderConfig || typeof userBuilderConfig !== 'object') {
-  //       error(
-  //         `Error loading ${chalk.bold('electron-builder.json')}: should export an object.`
-  //       );
-  //       userBuilderConfig = null;
-  //     }
-  //   }
-  //   catch (e) {
-  //     error(`Error loading ${chalk.bold('electron-builder.json')}:`);
-  //     error(e);
-  //   }
-  // }
-  
-  // Object.assign(builderConfig, userBuilderConfig);
-  
-  return builderConfig;
-}
-
-function getPackagerConfig(api) {
-  return {
-    platform      : 'win32',
-    // arch: toPackageArch(process.env.TARGET_ARCH),
-    asar          : true, // TODO: Probably wanna enable this down the road.
-    out           : SETUP_DIR,
-    icon          : api.resolve('public/favicon.png'),
-    dir           : OUTPUT_DIR,
-    overwrite     : true,
-    tmpdir        : false,
-    derefSymlinks : false,
-    prune         : false, // We'll prune them ourselves below.
-    ignore        : [
-      new RegExp('/node_modules/electron($|/)'),
-      new RegExp('/node_modules/electron-packager($|/)'),
-      new RegExp('/node_modules/electron-builder($|/)'),
-      new RegExp('/\\.git($|/)'),
-      new RegExp('/node_modules/\\.bin($|/)'),
-    ],
-    appCopyright : 'Copyright © 2019 Yealink, Inc.',
-    
-    // macOS
-    /*
-    appBundleId     : '1.0.1',
-    appCategoryType : 'public.app-category.developer-tools',
-    osxSign         : true,
-    protocols       : [
-      {
-        name    : getBundleID(),
-        schemes : [
-          isPublishableBuild
-            ? 'x-github-desktop-auth'
-            : 'x-github-desktop-dev-auth',
-          'x-github-client',
-          'github-mac',
-        ],
-      },
-    ],
-    extendInfo    : `${projectRoot}/script/info.plist`,
-    */
-   
-    // Windows
-    win32metadata : {
-      CompanyName      : 'Yealink',
-      FileDescription  : 'Yealink VC Desktop',
-      OriginalFilename : '',
-      ProductName      : 'Yealink VC Desktop',
-      InternalName     : 'Yealink',
-    },
-  };
-}
-
-const build = async(args, rawArgs, api, options) => {
-  const { remove } = require(api.resolve('./node_modules/fs-extra'));
-  const { inspect, promisify } = require('util');
-  const { execa, chalk, log, info, warn, error, done } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
-  const formatStats = require(api.resolve('./node_modules/@vue/cli-service/lib/commands/build/formatStats'));
-  const webpack = require(api.resolve('./node_modules/webpack'));
-  const mode = module.exports.defaultModes['pack:electron'];
-  const opts = {
-    setupDir  : SETUP_DIR,
-    outputDir : OUTPUT_DIR,
-    entryFile : ENTRY_FILE,
-  };
-
-  args.clean = true;
-  args.dest = api.resolve(opts.outputDir);
-  // temporary change baseUrl
-  const { publicPath: originPublicPath } = options;
-
-  options.publicPath = '';
-  // webpack config for renderer process
-  chainRendererWebpack(api, mode);
-  // webpack config for main process
-  const config = genMainWebpack(api, mode, opts);
-  // config for builder
-  
-  if (args.clean) {
-    await remove(api.resolve(opts.setupDir));
-  }
-  
-  return api.service.run('build', args)
-    .then(() => promisify(webpack)(config.toConfig())
-      .then((stats) => {
-        log(formatStats(stats, api.resolve(opts.outputDir), api));
-        done(`Build complete. The ${chalk.cyan(opts.outputDir)} directory is ready to be packed.`);
-        log();
-        // restore publicPath
-        options.publicPath = originPublicPath;
-      }));
-};
-
-const packageInstaller = async(args, rawArgs, api, options) => {
-  const { chalk, log, done, info } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
-
-  await build(args, rawArgs, api, options);
-
-  if (args.nopack) return Promise.resolve();
-
-  const { writeJson } = require(api.resolve('./node_modules/fs-extra'));
-  const pacakgeInfo = require(api.resolve('package.json'));
-
-  // process pacakgeInfo name
-  // whitespace & '-'
-  pacakgeInfo.main = `./${ENTRY_FILE}`;
-  pacakgeInfo.name = pacakgeInfo.name.replace(/-/g, '');
-
-  delProperty(pacakgeInfo, [ 'scripts', 'vuePlugins', 'devDependencies' ]);
-
-  await writeJson(
-    api.resolve(`${OUTPUT_DIR}/package.json`),
-    pacakgeInfo,
-    { spaces: 2 },
-  );
-
-  done(`Writen package.json into ${chalk.cyan(api.resolve(`${OUTPUT_DIR}/package.json`))}.`);
-  log();
-
-  const packager = require('electron-packager');
-  const packagerConfig = getPackagerConfig(api);
-  let packagerPath = await packager(packagerConfig);
-
-  log();
-  done(`Packaging complete. The ${chalk.cyan(packagerPath)} directory is ready to be build installer.`);
-
-  packagerPath = `${packagerPath}`;
-
-  info('Building installer.');
-  log();
-
-  const electronInstaller = require('electron-winstaller');
-
-  return electronInstaller.createWindowsInstaller({
-    appDirectory    : packagerPath,
-    // remoteReleases:`http://10.200.112.103:5014/update/win32/${pacakgeInfo.lastVersion}`,
-    iconUrl         : api.resolve('public/favicon.png'),
-    outputDirectory : INSTALLER_DIR,
-    // loadingGif:'public/win32-installer-splash.gif',
-    noMsi           : true,
-    noDelta         : true,
-  }).then(() => {
-    done('Build installer completed.');
-  });
-};
-
-function delProperty(obj, propertys) {
-  propertys.forEach((prop) => {
-    delete obj[prop];
-  });
 }
 
 function isPlainObj(o) {
