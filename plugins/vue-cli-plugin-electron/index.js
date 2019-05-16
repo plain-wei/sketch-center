@@ -30,8 +30,6 @@ module.exports = (api, options) => {
         entryFile : ENTRY_FILE,
       };
       
-      const instCount = args.multi === true ? 2 : args.multi || 1;
-      
       // webpack config for renderer process
       chainRendererWebpack(api, mode);
       
@@ -121,8 +119,6 @@ module.exports = (api, options) => {
           const electrons = [];
           const queuedData = [];
 
-          let count = 0;
-
           let lastLogIndex = null;
 
           function startElectron(index = 0) {
@@ -185,11 +181,8 @@ module.exports = (api, options) => {
 
             return electron;
           }
-            
-          while (count < instCount) {
-            startElectron(count);
-            count++;
-          }
+
+          startElectron();
 
           require('async-exit-hook')((callback) => {
             hmrServer.close(callback);

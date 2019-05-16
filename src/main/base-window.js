@@ -63,11 +63,20 @@ class BaseWindow extends EventEmitter {
     if (url) {
       this.window.loadURL(url);
     }
-    this.window.webContents.once('did-finish-load', () => {
+    const { webContents } = this.window;
+
+    webContents.once('did-finish-load', () => {
       if (process.env.NODE_ENV === 'development') {
-        this.window.webContents.openDevTools();
+        webContents.openDevTools();
       }
       this.restoreWindow();
+    });
+    webContents.on('before-input-event', (event, input) => {
+      if (input.type === 'keyUp' && input.key === 'F12') {
+        const method = webContents.isDevToolsOpened() ? 'closeDevTools' : 'openDevTools';
+
+        webContents[method]();
+      }
     });
   }
 
