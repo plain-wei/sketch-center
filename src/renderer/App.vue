@@ -1,5 +1,7 @@
 <template>
-  <div id="app">Hello Sketch Center</div>
+  <div id="app">
+    <router-view/>
+  </div>
 </template>
 
 <script>
@@ -11,8 +13,19 @@ export default {
 };
 </script>
 
-<style>
-  #app {
-    @apply text-center;
+<style lang="less">
+  html {
+    height: 100%;
+
+    body {
+      height: 100%;
+      padding: 0;
+      margin: 0;
+
+      #app {
+        height: 100%;
+      }
+    }
   }
+
 </style>

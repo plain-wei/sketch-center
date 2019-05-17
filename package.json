@@ -15,6 +15,7 @@
     "crocket": "^0.9.11",
     "delegates": "^1.0.0",
     "electron": "^5.0.1",
+    "element-ui": "^2.8.2",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6"
   },

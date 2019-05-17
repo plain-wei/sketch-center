@@ -4,8 +4,8 @@ import BaseWindow from './base-window';
 import PopupWindow from './popup-window';
 import { formatPathAsUrl } from './utils';
 
-const minWidth = 1120;
-const minHeight = 630;
+const minWidth = 1200;
+const minHeight = 740;
 
 class MainWindow extends BaseWindow {
   constructor(options = {}) {
