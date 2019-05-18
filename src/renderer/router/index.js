@@ -7,19 +7,21 @@ import AppFooter from '../views/AppFooter.vue';
 import MainContent from '../views/MainContent.vue';
 import MainHeader from '../views/MainHeader.vue';
 
-import SelfCenter from '../components/SelfCenter.vue';
+import SelfCenter from '../pages/SelfCenter.vue';
 
-import Recommendation from '../components/system/Recommendation.vue';
-import RadioCenter from '../components/system/RadioCenter.vue';
-import VideoCenter from '../components/system/VideoCenter.vue';
-import PhotoCenter from '../components/system/PhotoCenter.vue';
+import Recommendation from '../pages/system/Recommendation.vue';
+import RadioCenter from '../pages/system/RadioCenter.vue';
+import VideoCenter from '../pages/system/VideoCenter.vue';
+import PhotoCenter from '../pages/system/PhotoCenter.vue';
 
-import MusicSheet from '../components/sheet/MusicSheet.vue';
-import LocalMusic from '../components/local/LocalMusic.vue';
+import MusicSheet from '../pages/sheet/MusicSheet.vue';
+import LocalMusic from '../pages/local/LocalMusic.vue';
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
+  mode   : 'history',
+  base   : __dirname,
   routes : [
     {
       path      : '/',
@@ -71,6 +73,13 @@ const router = new VueRouter({
       redirect : '/main/recommendation',
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.fullPath === '/') {
+    return next('/main/recommendation');
+  }
+  next();
 });
 
 if (process.env.NODE_ENV === 'development') {

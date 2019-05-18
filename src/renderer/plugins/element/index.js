@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import 'element-ui/lib/theme-chalk/index.css';
+import './index.scss';
 
 import {
   Pagination,
@@ -44,6 +44,7 @@ import {
   Alert,
   Slider,
   Icon,
+  Scrollbar,
   Row,
   Col,
   Upload,
@@ -112,6 +113,7 @@ Vue.use(Tag);
 Vue.use(Tree);
 Vue.use(Alert);
 Vue.use(Slider);
+Vue.use(Scrollbar);
 Vue.use(Icon);
 Vue.use(Row);
 Vue.use(Col);

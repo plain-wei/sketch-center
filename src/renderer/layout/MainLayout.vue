@@ -1,7 +1,7 @@
 <template>
   <div id="main-layout" class="h-full">
     <div class="flex flex-col h-full">
-      <div class="flex flex-grow">
+      <div class="flex flex-grow h-1">
         <router-view name="sidebar"/>
         <div class="flex flex-col flex-grow">
           <router-view name="header"/>

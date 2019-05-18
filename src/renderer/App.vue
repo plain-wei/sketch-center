@@ -1,14 +1,19 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{backgroundImage: appBackImage}">
     <router-view/>
   </div>
 </template>
 
 <script>
-
 export default {
   name       : 'app',
   components : {
+  },
+  computed : {
+    appBackImage() {
+      return '';
+      // return false ? `url(${require('../assets/img/app-bg.jpg')})` : '';
+    },
   },
 };
 </script>
@@ -24,6 +29,7 @@ export default {
 
       #app {
         height: 100%;
+        background-size: cover;
       }
     }
   }
