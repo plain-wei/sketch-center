@@ -8,7 +8,7 @@
         <div v-for="(nav, index) in navList"
              :key="index"
              class="nav-item hover:bg-nav-hovered">
-          <i class="ml-9" :class="nav.icon"></i>
+          <sk-icon class="ml-9" :type="nav.icon"></sk-icon>
           <span class="px-2 text-sm truncate">{{nav.name}}</span>
         </div>
       </div>
@@ -22,12 +22,12 @@ export default {
   data() {
     return {
       navList : [
-        { name: '我的收藏', icon: 'el-icon-menu' },
-        { name: '安之若素', icon: 'el-icon-document' },
-        { name: '松墨初上', icon: 'el-icon-document' },
-        { name: '静默如初', icon: 'el-icon-document' },
-        { name: '时光请浅', icon: 'el-icon-document' },
-        { name: '轻吟浅唱，去拥抱一夏天的风', icon: 'el-icon-document' },
+        { name: '我的收藏', icon: 'sk-love' },
+        { name: '安之若素', icon: 'sk-music-list' },
+        { name: '松墨初上', icon: 'sk-music-list' },
+        { name: '静默如初', icon: 'sk-music-list' },
+        { name: '时光请浅', icon: 'sk-music-list' },
+        { name: '轻吟浅唱，去拥抱一夏天的风', icon: 'sk-music-list' },
       ],
     };
   },

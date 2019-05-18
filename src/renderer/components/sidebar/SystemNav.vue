@@ -4,7 +4,7 @@
       <div v-for="(nav, index) in navList"
            :key="index"
            class="nav-item hover:bg-nav-hovered">
-        <i class="ml-9" :class="nav.icon"></i>
+        <sk-icon class="ml-9" :type="nav.icon"></sk-icon>
         <span class="ml-2 text-sm">{{nav.name}}</span>
       </div>
     </div>
@@ -17,10 +17,10 @@ export default {
   data() {
     return {
       navList : [
-        { name: '推荐', icon: 'el-icon-star-off' },
-        { name: '电台', icon: 'el-icon-service' },
-        { name: '视频', icon: 'el-icon-mobile-phone' },
-        { name: '摄影', icon: 'el-icon-picture-outline' },
+        { name: '推荐', icon: 'sk-star' },
+        { name: '电台', icon: 'sk-screen' },
+        { name: '视频', icon: 'sk-video' },
+        { name: '摄影', icon: 'sk-camera' },
       ],
     };
   },

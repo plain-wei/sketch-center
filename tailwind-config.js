@@ -9,6 +9,8 @@ module.exports = {
       black  : '#000',
       black3 : '#333',
       black6 : '#666',
+      black7 : '#777',
+      black8 : '#888',
       black9 : '#999',
       white  : '#fff',
 

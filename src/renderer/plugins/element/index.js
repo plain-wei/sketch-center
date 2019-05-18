@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import './index.scss';
+import './iconfont';
 
 import {
   Pagination,
@@ -71,6 +72,8 @@ import {
   Message,
   Notification,
 } from 'element-ui';
+import SketchIcon from './components/SketchIcon.vue';
+
 
 Vue.use(Pagination);
 Vue.use(Dialog);
@@ -138,6 +141,10 @@ Vue.use(Main);
 Vue.use(Footer);
 
 Vue.use(Loading.directive);
+
+// ex
+Vue.component('sk-icon', SketchIcon);
+
 
 Vue.prototype.$loading = Loading.service;
 Vue.prototype.$msgbox = MessageBox;

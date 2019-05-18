@@ -8,7 +8,7 @@
         <div v-for="(nav, index) in navList"
              :key="index"
              class="nav-item hover:bg-nav-hovered">
-          <i class="ml-9" :class="nav.icon"></i>
+          <sk-icon class="ml-9" :type="nav.icon"></sk-icon>
           <span class="ml-2 text-sm">{{nav.name}}</span>
         </div>
       </div>
@@ -22,8 +22,8 @@ export default {
   data() {
     return {
       navList : [
-        { name: '本地音乐', icon: 'el-icon-location-outline' },
-        { name: '最近播放', icon: 'el-icon-time' },
+        { name: '本地音乐', icon: 'sk-screen' },
+        { name: '最近播放', icon: 'sk-clock' },
       ],
     };
   },
