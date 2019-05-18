@@ -1,10 +1,10 @@
 <template>
-  <div id="main-header" class="drag">
+  <div id="main-header" class="drag bg-main-header">
     <div class="flex items-center h-full">
       <div class="flex flex-grow ml-10">
         <el-input
-            class="no-drag"
-            size="medium"
+            class="no-drag search-input"
+            size="small"
             style="width: 280px"
             v-model="searchText"
             placeholder="请输入内容"
@@ -33,9 +33,13 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less">
 #main-header {
   height: 60px;
-  background-color: #f2eef2;
+  .search-input {
+    >input {
+      border-radius: 100px;
+    }
+  }
 }
 </style>

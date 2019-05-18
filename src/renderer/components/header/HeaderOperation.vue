@@ -1,13 +1,13 @@
 <template>
   <div id="header-operation">
-    <div class="flex text-xl">
-      <div class="operation-item minimize no-drag">
+    <div class="flex text-xl px-2">
+      <div class="operation-item minimize no-drag hover:text-black6">
         <sk-icon type="sk-minimize"/>
       </div>
-      <div class="operation-item maximize no-drag">
+      <div class="operation-item maximize no-drag hover:text-black6">
         <sk-icon type="sk-maximize"/>
       </div>
-      <div class="operation-item close no-drag">
+      <div class="operation-item close no-drag hover:text-danger">
         <sk-icon type="sk-close"/>
       </div>
     </div>
@@ -24,9 +24,6 @@ export default {
 #header-operation {
   .operation-item {
     @apply flex items-center cursor-pointer mx-2 text-black8;
-  }
-  .maximize {
-
   }
 }
 </style>

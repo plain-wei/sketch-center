@@ -1,6 +1,6 @@
 module.exports = {
   prefix    : '',
-  important : false,
+  important : true,
   separator : ':',
   theme     : {
     colors : {
@@ -15,10 +15,18 @@ module.exports = {
       white  : '#fff',
 
       sidebar        : 'rgba(244,244,244,0.8)',
-      'main-header'  : 'rgba(252,252,252,0.81)',
-      'list-title'   : 'rgba(245,245,245,0.81)',
-      'nav-hovered'  : '#dcd4e2',
+      footer         : 'rgba(221,221,221,0.8)',
+      'theme-color'  : '#afa8a6',
+      'main-header'  : 'rgba(252,252,252,0.80)',
+      'list-title'   : 'rgba(245,245,245,0.80)',
+      'nav-hovered'  : '#e6e3e0',
       'item-hovered' : '#e0e1ea',
+
+      'music-controls' : '#afa8a6',
+
+      success : '#67C23A',
+      warn    : '#E6A23C',
+      danger  : '#F56C6C',
     },
     spacing : {
       px : '1px',

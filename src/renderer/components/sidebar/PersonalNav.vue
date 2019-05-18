@@ -23,11 +23,11 @@ export default {
     return {
       navList : [
         { name: '我的收藏', icon: 'sk-love' },
-        { name: '安之若素', icon: 'sk-music-list' },
-        { name: '松墨初上', icon: 'sk-music-list' },
-        { name: '静默如初', icon: 'sk-music-list' },
-        { name: '时光请浅', icon: 'sk-music-list' },
-        { name: '轻吟浅唱，去拥抱一夏天的风', icon: 'sk-music-list' },
+        { name: '安之若素', icon: 'sk-playlist' },
+        { name: '松墨初上', icon: 'sk-playlist' },
+        { name: '静默如初', icon: 'sk-playlist' },
+        { name: '时光请浅', icon: 'sk-playlist' },
+        { name: '轻吟浅唱，去拥抱一夏天的风', icon: 'sk-playlist' },
       ],
     };
   },

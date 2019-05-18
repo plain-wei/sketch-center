@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       navList : [
-        { name: '本地音乐', icon: 'sk-screen' },
+        { name: '本地音乐', icon: 'sk-local' },
         { name: '最近播放', icon: 'sk-clock' },
       ],
     };

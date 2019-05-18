@@ -18,7 +18,7 @@ export default {
     return {
       navList : [
         { name: '推荐', icon: 'sk-star' },
-        { name: '电台', icon: 'sk-screen' },
+        { name: '电台', icon: 'sk-audio' },
         { name: '视频', icon: 'sk-video' },
         { name: '摄影', icon: 'sk-camera' },
       ],
