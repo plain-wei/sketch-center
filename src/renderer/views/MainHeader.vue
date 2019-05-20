@@ -1,7 +1,10 @@
 <template>
   <div id="main-header" class="drag bg-main-header">
     <div class="flex items-center h-full">
-      <div class="flex flex-grow ml-10">
+      <sk-icon class="mx-2 px-2 cursor-pointer no-drag text-theme-color hover:text-black6"
+               type="sk-arrowleft"
+               @click.native="goBack"/>
+      <div class="flex flex-grow">
         <el-input
             class="no-drag search-input"
             size="small"
@@ -29,6 +32,11 @@ export default {
     return {
       searchText : '',
     };
+  },
+  methods : {
+    goBack() {
+      this.$router.back();
+    },
   },
 };
 </script>

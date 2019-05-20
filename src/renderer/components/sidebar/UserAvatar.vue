@@ -1,12 +1,16 @@
 <template>
-  <div id="user-avatar" @click="visible = true">
-    <img :src="userInfo.avatar" :style="{width: imageSize, height: imageSize}"/>
-  </div>
+  <shared-avatar :url="userInfo.avatar" :size="size"/>
 </template>
 
 <script>
+/* eslint-disable global-require */
+import SharedAvatar from '../shared/SharedAvatar.vue';
+
 export default {
-  name  : 'UserAvatar',
+  name       : 'UserAvatar',
+  components : {
+    SharedAvatar,
+  },
   props : {
     size : {
       type    : Number,
@@ -19,11 +23,6 @@ export default {
         avatar : require('../../../assets/img/user-avatar.jpeg'),
       },
     };
-  },
-  computed : {
-    imageSize() {
-      return `${this.size}px`;
-    },
   },
 };
 </script>

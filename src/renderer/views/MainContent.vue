@@ -1,5 +1,5 @@
 <template>
-  <div id="main-content" class="h-full">
+  <div id="main-content" class="h-full flex">
     <router-view/>
   </div>
 </template>

@@ -3,7 +3,7 @@
     <div class="flex flex-col h-full">
       <div class="flex flex-grow h-1">
         <router-view name="sidebar"/>
-        <div class="flex flex-col flex-grow">
+        <div class="flex flex-col w-1 flex-grow">
           <router-view name="header"/>
           <router-view/>
         </div>

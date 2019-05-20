@@ -1,6 +1,6 @@
 <template>
   <i class="sketch-icon">
-    <svg class="icon" aria-hidden="true">
+    <svg class="icon svgfont" aria-hidden="true">
       <use :xlink:href="xlinkHref"></use>
     </svg>
   </i>
@@ -25,13 +25,6 @@ export default {
 
 <style scoped lang="less">
 .sketch-icon {
-  display: inline-block;
-  font-style: normal;
-  vertical-align: -0.125em;
-  text-align: center;
-  text-transform: none;
-  line-height: 0;
-  text-rendering: optimizeLegibility;
   .icon {
     width: 1em;
     height: 1em;

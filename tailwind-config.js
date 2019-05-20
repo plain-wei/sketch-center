@@ -23,6 +23,7 @@ module.exports = {
       'item-hovered' : '#e0e1ea',
 
       'music-controls' : '#afa8a6',
+      'my-sheet'       : 'rgba(252,252,252,0.80)',
 
       success : '#67C23A',
       warn    : '#E6A23C',

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Tray, Menu, app, powerSaveBlocker } from 'electron';
 import { resolve } from 'path';
 import BaseWindow from './base-window';
@@ -36,7 +37,7 @@ class MainWindow extends BaseWindow {
   }
 
   initTray() {
-    this.tray = new Tray(resolve(__public, 'favicon.ico'));
+    this.tray = new Tray(resolve('public', 'favicon.ico'));
     this.tray.setToolTip('Sketch Center');
     const contextMenu = Menu.buildFromTemplate([
       { label: '测试Tray', type: 'radio' },
@@ -99,7 +100,7 @@ class MainWindow extends BaseWindow {
   }
 
   loadUrl() {
-    console.warn(process.env.NODE_ENV);
+    console.warn('http://localhost:9080');
     super.load(
       process.env.NODE_ENV === 'development'
         ? process.env.WEBPACK_DEV_SERVER_URL

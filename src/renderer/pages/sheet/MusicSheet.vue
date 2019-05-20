@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: "MusicSheet"
-  }
+export default {
+  name : 'MusicSheet',
+};
 </script>
 
 <style scoped>

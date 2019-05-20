@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { ipcMain } from 'electron';
 import BaseWindow from './base-window';
 

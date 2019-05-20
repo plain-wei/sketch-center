@@ -7,7 +7,7 @@ import AppFooter from '../views/AppFooter.vue';
 import MainContent from '../views/MainContent.vue';
 import MainHeader from '../views/MainHeader.vue';
 
-import SelfCenter from '../pages/SelfCenter.vue';
+import SelfCenter from '../pages/home/SelfCenter.vue';
 
 import Recommendation from '../pages/system/Recommendation.vue';
 import RadioCenter from '../pages/system/RadioCenter.vue';
@@ -17,10 +17,13 @@ import PhotoCenter from '../pages/system/PhotoCenter.vue';
 import MusicSheet from '../pages/sheet/MusicSheet.vue';
 import LocalMusic from '../pages/local/LocalMusic.vue';
 
+// sheet info
+import SheetDetails from '../pages/sheet/SheetDetails.vue';
+
 Vue.use(VueRouter);
 
 const router = new VueRouter({
-  mode   : 'history',
+  mode   : 'hash',
   base   : __dirname,
   routes : [
     {
@@ -63,6 +66,10 @@ const router = new VueRouter({
             {
               path      : 'selfCenter',
               component : SelfCenter,
+            },
+            {
+              path      : 'sheetDetails',
+              component : SheetDetails,
             },
           ],
         },

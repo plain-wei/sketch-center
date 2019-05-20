@@ -3,3 +3,4 @@ out/
 node_modules/
 **/node_modules/
 src/renderer/plugins/element/iconfont.js
+src/renderer/plugins/element/index.scss

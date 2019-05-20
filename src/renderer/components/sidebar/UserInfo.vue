@@ -50,7 +50,7 @@ export default {
   data() {
     return {
       userInfo : {
-        name   : '未思',
+        name : '未思',
       },
       visible : false,
     };

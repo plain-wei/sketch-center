@@ -7,7 +7,8 @@
       <div class="nav-items">
         <div v-for="(nav, index) in navList"
              :key="index"
-             class="nav-item hover:bg-nav-hovered">
+             class="nav-item hover:bg-nav-hovered"
+             @click="$router.push(nav.route)">
           <sk-icon class="ml-9" :type="nav.icon"></sk-icon>
           <span class="ml-2 text-sm">{{nav.name}}</span>
         </div>
@@ -22,8 +23,8 @@ export default {
   data() {
     return {
       navList : [
-        { name: '本地音乐', icon: 'sk-local' },
-        { name: '最近播放', icon: 'sk-clock' },
+        { name: '本地音乐', icon: 'sk-local', route: '/main/localMusic' },
+        { name: '最近播放', icon: 'sk-clock', route: '/main/localMusic' },
       ],
     };
   },
