@@ -19,6 +19,7 @@ import LocalMusic from '../pages/local/LocalMusic.vue';
 
 // sheet info
 import SheetDetails from '../pages/sheet/SheetDetails.vue';
+import UpdateSheet from '../pages/sheet/UpdateSheet.vue';
 
 Vue.use(VueRouter);
 
@@ -28,10 +29,12 @@ const router = new VueRouter({
   routes : [
     {
       path      : '/',
+      name      : '',
       component : MainLayout,
       children  : [
         {
           path       : 'main',
+          name       : 'main',
           components : {
             header  : MainHeader,
             sidebar : AppSidebar,
@@ -41,35 +44,48 @@ const router = new VueRouter({
           children : [
             {
               path      : 'recommendation',
+              name      : 'recommendation',
               component : Recommendation,
             },
             {
+              name      : 'radioCenter',
               path      : 'radioCenter',
               component : RadioCenter,
             },
             {
+              name      : 'videoCenter',
               path      : 'videoCenter',
               component : VideoCenter,
             },
             {
+              name      : 'photoCenter',
               path      : 'photoCenter',
               component : PhotoCenter,
             },
             {
+              name      : 'musicSheet',
               path      : 'musicSheet',
               component : MusicSheet,
             },
             {
+              name      : 'localMusic',
               path      : 'localMusic',
               component : LocalMusic,
             },
             {
+              name      : 'selfCenter',
               path      : 'selfCenter',
               component : SelfCenter,
             },
             {
+              name      : 'sheetDetails',
               path      : 'sheetDetails',
               component : SheetDetails,
+            },
+            {
+              name      : 'updateSheet',
+              path      : 'updateSheet',
+              component : UpdateSheet,
             },
           ],
         },

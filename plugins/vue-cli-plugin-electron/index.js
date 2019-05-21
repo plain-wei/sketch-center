@@ -23,16 +23,16 @@ module.exports = (api, options) => {
       const { inspect, promisify } = require('util');
       const { execa, chalk, log, info, warn, error, done } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
       const webpack = require(api.resolve('./node_modules/webpack'));
-      
+
       const mode = args.mode || module.exports.defaultModes['serve:electron'];
       const opts = {
         outputDir : OUTPUT_DIR,
         entryFile : ENTRY_FILE,
       };
-      
+
       // webpack config for renderer process
       chainRendererWebpack(api, mode);
-      
+
       // webpack config for main process
       const config = genMainWebpack(api, mode, opts);
 
@@ -45,9 +45,9 @@ module.exports = (api, options) => {
 
           const path = require('path');
           const { entryFile } = opts;
-          
+
           config.plugin('env')
-            .use(webpack.EnvironmentPlugin, [ { 
+            .use(webpack.EnvironmentPlugin, [ {
               WEBPACK_DEV_SERVER_URL  : server.url,
               WEBPACK_HMR_SOCKET_PATH : hmrServer.socketPath,
             } ]);
@@ -56,7 +56,7 @@ module.exports = (api, options) => {
             .add(
               path.resolve(__dirname, 'main-hmr.js')
             );
-          
+
           return new Promise((resolve, reject) => {
             let handleResolve = resolve;
 
@@ -68,11 +68,11 @@ module.exports = (api, options) => {
               hmrServer.beforeCompile();
               info('Compiling main process...');
             });
-  
+
             const watcher = compiler.watch({}, (e, stats) => {
               logError(e);
               logStats(stats);
-              
+
               if (e) {
                 if (handleReject) {
                   handleReject(e);
@@ -87,14 +87,14 @@ module.exports = (api, options) => {
                 handleResolve(hmrServer);
                 handleResolve = null;
               }
-  
+
               hmrServer.built(stats);
             });
-  
+
             require('async-exit-hook')((callback) => {
               watcher.close(() => callback());
             });
-            
+
             function logError(e) {
               if (e) {
                 console.error(e);
@@ -103,16 +103,16 @@ module.exports = (api, options) => {
                 }
               }
             }
-            
+
             function logStats(stats) {
               if (stats.hasErrors()) {
                 console.error(info.errors);
               }
-              
+
               if (stats.hasWarnings()) {
                 console.warn(info.warnings);
               }
-            }  
+            }
           });
         })
         .then((hmrServer) => {
@@ -153,7 +153,7 @@ module.exports = (api, options) => {
                 }
               }
             });
-            
+
             electron.stdout.on('data', (data) => {
               data = data.toString().trim();
 
@@ -161,7 +161,7 @@ module.exports = (api, options) => {
 
               if (data === '[HMR] Updated modules:') {
                 queuedData[index] = data;
-                
+
                 return;
               }
 
@@ -169,7 +169,7 @@ module.exports = (api, options) => {
                 data = queuedData[index] + data;
                 queuedData[index] = null;
               }
-              
+
               if (lastLogIndex === null || lastLogIndex !== index) {
                 lastLogIndex = index;
                 info(`Electron ${index === 0 ? '' : index}:`);
@@ -217,7 +217,8 @@ function chainRendererWebpack(api, mode = 'production') {
         tls           : false,
         child_process : false,
       });
-    config.plugin('define')
+    config
+      .plugin('define')
       .tap((opts) => {
         opts[0].__DARWIN__ = process.platform === 'darwin';
         opts[0].__WIN32__ = process.platform === 'win32';
@@ -243,7 +244,7 @@ function chainRendererWebpack(api, mode = 'production') {
 function genMainWebpack(api, mode = 'production', opts = {}) {
   const { outputDir = 'electron', entryFile = ENTRY_FILE } = opts;
   const config = api.resolveChainableWebpackConfig();
-  
+
   config.entryPoints.clear();
   config.module.rules.clear();
   config.node
@@ -306,7 +307,7 @@ function genMainWebpack(api, mode = 'production', opts = {}) {
     .filename('[name].js')
     .chunkFilename('[name].js')
     .publicPath('');
-  
+
   return config;
 }
 
@@ -334,7 +335,7 @@ async function startHMRServer(api) {
   const { chalk, log, done, info, warn, error } = require(api.resolve('./node_modules/@vue/cli-shared-utils'));
 
   await hmrServer.listen();
-  
+
   hmrServer.ipc.on('close', () => {
     done('HMR server closed');
   });

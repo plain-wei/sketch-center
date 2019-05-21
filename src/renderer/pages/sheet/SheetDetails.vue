@@ -31,7 +31,7 @@
         <el-button plain size="small">
           <sk-icon type="sk-love"/>收藏
         </el-button>
-        <el-button plain size="small">
+        <el-button plain size="small" @click="toUpdateSheet">
           <sk-icon type="sk-edit"/>编辑
         </el-button>
       </div>
@@ -156,6 +156,9 @@ export default {
   methods : {
     selectionChange() {
 
+    },
+    toUpdateSheet() {
+      this.$router.push({ name: 'updateSheet', params: this.sheet });
     },
   },
 };
