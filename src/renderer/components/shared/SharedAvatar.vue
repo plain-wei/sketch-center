@@ -5,26 +5,26 @@
 </template>
 
 <script>
-  /* eslint-disable global-require */
+/* eslint-disable global-require */
 
-  export default {
-    name  : 'SharedAvatar',
-    props : {
-      size : {
-        type    : Number,
-        default : 40,
-      },
-      url : {
-        type : String,
-        required: true
-      }
+export default {
+  name  : 'SharedAvatar',
+  props : {
+    size : {
+      type    : Number,
+      default : 40,
     },
-    computed : {
-      imageSize() {
-        return `${this.size}px`;
-      },
+    url : {
+      type     : String,
+      required : true,
     },
-  };
+  },
+  computed : {
+    imageSize() {
+      return `${this.size}px`;
+    },
+  },
+};
 </script>
 
 <style scoped lang="less">

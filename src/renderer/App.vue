@@ -15,6 +15,9 @@ export default {
       // return false ? `url(${require('../assets/img/app-bg.jpg')})` : '';
     },
   },
+  mounted() {
+    // console.warn(__static);
+  },
 };
 </script>
 

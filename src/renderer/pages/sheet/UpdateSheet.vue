@@ -36,7 +36,7 @@ export default {
     const { params } = this.$router.currentRoute;
 
     this.updatedSheet = cloneDeep(params);
-    console.warn(this.updatedSheet)
+    console.warn(this.updatedSheet);
   },
 };
 </script>

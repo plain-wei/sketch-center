@@ -32,7 +32,6 @@ module.exports = (api, options) => {
 
       // webpack config for renderer process
       chainRendererWebpack(api, mode);
-
       // webpack config for main process
       const config = genMainWebpack(api, mode, opts);
 
