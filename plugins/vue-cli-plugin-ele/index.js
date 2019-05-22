@@ -5,10 +5,8 @@ module.exports = (api, options) => {
     description : 'electron runner',
     usage       : 'vue-cli-service run:electron [options]',
     options     : {},
-  }, (args) => Promise.all([
-    startRenderer(api, args.mode || 'development', args),
-    startMain(api, args.mode || 'development'),
-  ])
-    .then(() => startElectron())
+  }, (args) => startRenderer(api, args.mode || 'development', args)
+    .then((server) => startMain(api, args.mode || 'development', server))
+    .then(() => startElectron(api))
     .catch((error) => console.error(error)));
 };

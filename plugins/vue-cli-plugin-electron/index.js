@@ -263,7 +263,7 @@ function genMainWebpack(api, mode = 'production', opts = {}) {
       child_process : false,
     });
   config.target('electron-main');
-  config.entry(entryFile.substring(0, entryFile.length - 3)).add(api.resolve(`./src/main/${entryFile}`));
+  config.entry(entryFile.substring(0, entryFile.length - 3)).add(api.resolve(`src/main/${entryFile}`));
   config.plugins.values().forEach((plugin) => {
     switch (plugin.name) {
       case 'define':

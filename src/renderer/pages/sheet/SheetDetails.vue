@@ -57,7 +57,7 @@
               width="120">
           </el-table-column>
           <el-table-column
-              prop="signer"
+              prop="album"
               label="专辑"
               width="120">
           </el-table-column>

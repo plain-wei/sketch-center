@@ -40,7 +40,7 @@ class MainWindow extends BaseWindow {
     this.tray = new Tray(resolve('public', 'favicon.ico'));
     this.tray.setToolTip('Sketch Center');
     const contextMenu = Menu.buildFromTemplate([
-      { label: '测试Tray', type: 'radio' },
+      { label: '退出应用', type: 'radio' },
     ]);
 
     this.tray.setToolTip('This is my application.');
@@ -100,7 +100,7 @@ class MainWindow extends BaseWindow {
   }
 
   loadUrl() {
-    console.warn('http://localhost:9080');
+    console.warn(process.env.WEBPACK_DEV_SERVER_URL);
     super.load(
       process.env.NODE_ENV === 'development'
         ? process.env.WEBPACK_DEV_SERVER_URL

@@ -1,6 +1,6 @@
 <template>
   <div id="recommendation">
-    推荐
+    推荐区域
   </div>
 </template>
 
