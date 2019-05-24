@@ -192,7 +192,7 @@ export default {
     }
   }
   .song-list, .comment-list {
-    @apply flex flex-grow flex-col h-1 bg-my-sheet mt-2;
+    @apply flex flex-grow flex-col h-1 mt-2;
     .el-scrollbar__wrap {
       @apply overflow-x-hidden px-4;
     }

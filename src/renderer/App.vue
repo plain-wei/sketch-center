@@ -12,7 +12,7 @@ export default {
   computed : {
     appBackImage() {
       return '';
-      // return false ? `url(${require('../assets/img/app-bg.jpg')})` : '';
+      // return `url(${require('../assets/img/app-bg.jpg')})`;
     },
   },
   mounted() {

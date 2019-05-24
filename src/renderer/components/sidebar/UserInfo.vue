@@ -70,7 +70,8 @@ export default {
 }
   .user-info-popper {
     left: -6px !important;
-    padding: 0px !important;
+    padding: 0 !important;
+    @apply bg-white;
     .top-content{
       height: 60px;
       border-bottom: 1px solid #EEE;

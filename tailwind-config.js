@@ -16,14 +16,15 @@ module.exports = {
 
       sidebar        : 'rgba(244,244,244,0.8)',
       footer         : 'rgba(221,221,221,0.8)',
-      'theme-color'  : '#afa8a6',
-      'main-header'  : 'rgba(252,252,252,0.80)',
-      'list-title'   : 'rgba(245,245,245,0.80)',
-      'nav-hovered'  : '#e6e3e0',
+      'theme-color'  : 'rgba(175,168,166,0.8)',
+      'main-header'  : 'rgba(252,252,252,0.8)',
+      'main-content' : 'rgba(250,250,250,0.8)',
+      'list-title'   : 'rgba(245,245,245,0.8)',
+      'nav-hovered'  : 'rgba(230,227,224,0.6)',
       'item-hovered' : '#e0e1ea',
 
       'music-controls' : '#afa8a6',
-      'my-sheet'       : 'rgba(252,252,252,0.80)',
+      'my-sheet'       : 'rgba(252,252,252,0.8)',
 
       success : '#67C23A',
       warn    : '#E6A23C',
