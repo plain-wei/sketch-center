@@ -27,7 +27,7 @@
       </el-input>
       <div class="flex justify-end mt-4">
         <el-button type="primary" size="small" class="w-20">保存</el-button>
-        <el-button size="small" class="w-20">取消</el-button>
+        <el-button size="small" class="w-20" @click="$router.back()">取消</el-button>
       </div>
     </div>
   </div>

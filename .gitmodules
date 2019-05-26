@@ -1,0 +1,3 @@
+[submodule "server/lib/skoa"]
+	path = server/lib/skoa
+	url = git@github.com:plain-wei/skoa.git
