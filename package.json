@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "serve:electron": "vue-cli-service run:electron",
-    "dev": "vue-cli-service run:electron"
+    "dev": "vue-cli-service run:electron",
+    "run:server": "node server\\app.js"
   },
   "dependencies": {
     "async-exit-hook": "^2.0.1",
@@ -18,6 +19,10 @@
     "element-theme": "^2.0.1",
     "element-ui": "^2.8.2",
     "eslint-friendly-formatter": "^4.0.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-mysql-session": "^0.0.2",
+    "koa-session-minimal": "^3.0.4",
+    "mysql": "^2.17.1",
     "vue": "^2.6.10",
     "vue-router": "^3.0.6",
     "webpack-hot-middleware": "^2.25.0"

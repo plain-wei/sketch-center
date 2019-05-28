@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import './plugins/element';
 import './plugins/tailwind/tailwind.less';
+import '../../server/app';
 
 Vue.config.productionTip = false;
 
