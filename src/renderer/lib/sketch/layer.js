@@ -16,7 +16,7 @@ export default class Layer {
   use(fn) {
     if (typeof fn !== 'function') throw new TypeError('middleware must be a function!');
 
-    this.middleware.push(fn);
+    this.middleware.push((ctx, next) => fn.call(this.vm, ctx, next));
 
     return this;
   }
@@ -46,6 +46,7 @@ export default class Layer {
       if (ctx.ns !== false && !this.match(ctx.ns)) return next ? next() : Promise.resolve();
 
       ctx.model = ctx.layer = this;
+      ctx.vm = this.vm || ctx.vm;
 
       const fn = compose(this.middleware);
 
@@ -57,7 +58,7 @@ export default class Layer {
     ctx = ctx || this.createContext();
 
     ctx.method = method;
-    ctx.payload = payload;
+    ctx.payload = payload || {};
 
     return this.callback()(ctx);
   }
