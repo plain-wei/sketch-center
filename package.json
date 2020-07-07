@@ -15,7 +15,7 @@
     "core-js": "^2.6.5",
     "crocket": "^0.9.11",
     "delegates": "^1.0.0",
-    "electron": "^5.0.1",
+    "electron": "^7.2.4",
     "element-theme": "^2.0.1",
     "element-ui": "^2.8.2",
     "eslint-friendly-formatter": "^4.0.1",
